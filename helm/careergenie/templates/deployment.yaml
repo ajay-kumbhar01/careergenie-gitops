@@ -22,6 +22,12 @@ spec:
         - name: careergenie
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-
           ports:
             - containerPort: {{ .Values.containerPort }}
+          env:
+            - name: CLERK_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: careergenie-secrets
+                  key: CLERK_SECRET_KEY
+           
